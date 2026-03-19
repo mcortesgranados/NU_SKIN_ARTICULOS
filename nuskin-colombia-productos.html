@@ -1,0 +1,362 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indice oficial de productos Nu Skin Colombia</title>
+  <meta name="description" content="Indice de productos ofrecidos por Nu Skin Colombia con numero, categoria, descripcion breve, enlace oficial y boton para copiar.">
+  <style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #fafbfc; color: #23272f; margin: 0; padding: 0; }
+  .container { max-width: 1380px; margin: 40px auto; background: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border-radius: 10px; padding: 32px 40px; }
+  h1 { color: #1565c0; margin-top: 0; }
+  h2 { color: #2e7d32; margin-top: 32px; }
+  h3 { color: #7b1fa2; margin-top: 24px; }
+  .note { background: #e3f2fd; border-left: 4px solid #1976d2; padding: 16px 20px; margin: 18px 0; border-radius: 7px; }
+  .note ul { list-style: disc inside; margin: 0; padding-left: 1.2em; }
+  .note li { margin-bottom: 3px; line-height: 1.35; }
+  .note p { margin: 0 0 6px 0; line-height: 1.5; }
+  .footer { text-align: right; color: #888; font-size: 1em; margin-top: 40px; }
+  .tag { background: #e3f2fd; color: #1565c0; border-radius: 4px; padding: 3px 8px; margin-left: 6px; font-size: 0.95em; }
+  dt { color: #2e7d32; font-weight: bold; margin-top: 10px; }
+  dd { margin-bottom: 10px; }
+  .params table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  .params th, .params td { border: 1px solid #ccc; padding: 8px; vertical-align: top; }
+  .important { background: #fffde7; border-left: 4px solid #fbc02d; padding: 12px 18px; margin: 18px 0; border-radius: 5px; }
+  .sideEffects ul, .solid ul { margin: 0; padding-left: 20px; }
+  @media (max-width: 600px) { .container { padding: 16px 8px; } }
+  pre { background: #f6f8fa; padding: 14px; border-radius: 8px; overflow: auto; font-size: 0.92em; }
+  code { font-family: Consolas, 'Courier New', monospace; }
+  .row { display:flex; gap:20px; flex-wrap:wrap; }
+  .col { flex:1 1 420px; }
+  .endpoint { border: 1px solid #e0e0e0; padding: 12px 14px; border-radius: 8px; background: #fff; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
+  .json { white-space: pre; font-family: Consolas, 'Courier New', monospace; font-size: 0.95em; }
+  .success { color: #2e7d32; font-weight: 600; }
+  .error { color: #c62828; font-weight: 600; }
+  .toolbar { display:flex; gap:12px; flex-wrap:wrap; margin: 22px 0 14px; }
+  .toolbar input, .toolbar select { flex:1 1 280px; border: 1px solid #cfd8dc; border-radius: 8px; padding: 10px 12px; font: inherit; }
+  .params { overflow-x: auto; }
+  .name { font-weight: 600; color: #23272f; }
+  .small { font-size: 0.92em; color: #666; }
+  .copy-btn, .img-btn { border: 0; border-radius: 8px; padding: 8px 10px; font: inherit; cursor: pointer; }
+  .copy-btn { background: #1565c0; color: #fff; font-weight: 600; }
+  .copy-btn:hover { background: #0d47a1; }
+  .img-btn { background: #fff3e0; color: #ef6c00; font-size: 1.1rem; }
+  .img-btn:hover { background: #ffe0b2; }
+  .img-btn.empty { background: #eceff1; color: #607d8b; }
+  .link { color: #1565c0; word-break: break-word; }
+  .url { display:block; margin-top: 4px; font-size: 0.88em; color: #607d8b; word-break: break-word; }
+  .count-box { display:flex; gap:12px; flex-wrap:wrap; margin-top: 14px; }
+  .count-box .endpoint { flex: 1 1 180px; }
+  .badge { display:inline-block; border-radius: 999px; padding: 3px 10px; background:#eef7ee; color:#2e7d32; font-size: 0.9em; font-weight: 600; }
+  .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin: 18px 0 22px; }
+  .download-card { border: 1px solid #e0e0e0; border-radius: 10px; background: #fff; box-shadow: 0 3px 8px rgba(0,0,0,0.04); padding: 18px; }
+  .download-card h3 { margin: 0 0 8px 0; color: #1565c0; font-size: 1.08rem; }
+  .download-meta { margin-top: 8px; color: #666; font-size: 0.9rem; }
+  .download-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .download-btn { display: inline-block; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-weight: 600; border: 1px solid #d7e3f4; background: #eef4fb; color: #1565c0; }
+  .download-btn.primary { background: #1565c0; color: #fff; border-color: #1565c0; }
+  .download-btn:hover { filter: brightness(1.02); }
+  .toast { position: fixed; right: 18px; bottom: 18px; background: rgba(35,39,47,0.96); color: #fff; padding: 12px 14px; border-radius: 10px; opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity 160ms ease, transform 160ms ease; z-index: 60; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .modal[hidden] { display: none; }
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.72); display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 70; }
+  .modal-card { width: min(900px, 100%); background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+  .modal-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 16px 18px; border-bottom: 1px solid #eceff1; }
+  .modal-title { margin: 0; font-size: 1.05rem; color: #1565c0; }
+  .modal-close { border: 0; background: #f5f5f5; border-radius: 8px; padding: 8px 10px; cursor: pointer; font: inherit; }
+  .modal-body { padding: 18px; }
+  .modal-img-wrap { background: #f8fafc; border: 1px solid #eceff1; border-radius: 12px; overflow: hidden; min-height: 320px; display:flex; align-items:center; justify-content:center; }
+  .modal-img { display:block; width:100%; height:auto; max-height: 70vh; object-fit: contain; background: #fff; }
+  .modal-caption { margin: 14px 0 0 0; color: #555; line-height: 1.6; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Indice oficial de productos Nu Skin Colombia</h1>
+    <p>
+      Listado generado desde el catalogo oficial de Nu Skin Colombia. Cada fila incluye numeracion,
+      categoria, descripcion breve, enlace oficial, boton para copiar y un emoji para ver imagen.
+    </p>
+
+    <div class="note">
+      <p><strong>Fuentes oficiales consultadas:</strong></p>
+      <ul>
+        <li><a href="https://www.nuskin.com/content/nuskin/es_CO/products/shop/view_all.html" target="_blank" rel="noopener">Catalogo Ver Todos los Productos</a></li>
+        <li><code>https://apis.nuskin.com/product/graphql</code> para enriquecer descripcion e imagen cuando estuvo disponible.</li>
+      </ul>
+    </div>
+
+    <div class="count-box">
+      <div class="endpoint">
+        <div class="small">Productos indexados</div>
+        <div class="success" id="product-count">83</div>
+      </div>
+      <div class="endpoint">
+        <div class="small">Visibles en pantalla</div>
+        <div class="success" id="visible-count">83</div>
+      </div>
+      <div class="endpoint">
+        <div class="small">Con imagen oficial</div>
+        <div class="success">22</div>
+      </div>
+      <div class="endpoint">
+        <div class="small">Generado</div>
+        <div class="small">2026-03-18 20:57:22 -05:00</div>
+      </div>
+    </div>
+
+    <div class="important">
+      <p><strong>Nota:</strong> cuando Nu Skin no expone una imagen oficial en la fuente consultada, el emoji abre una vista placeholder para no dejar la fila vacia.</p>
+    </div>
+
+    <h2>Descargas</h2>
+    <div class="note">
+      <p><strong>PDF disponibles:</strong> lista de precios detallada Colombia 2025 y resumen visual del plan de compensacion LATAM 2025.</p>
+    </div>
+
+    <div class="download-grid">
+      <article class="download-card">
+        <span class="badge">PDF / Colombia / 2025</span>
+        <h3>Lista de precios detallada Colombia 2025</h3>
+        <p>Documento oficial en PDF con la lista de precios detallada para Colombia.</p>
+        <div class="download-meta">Archivo: <code>CO-lista-de-precios-detallada-2025.pdf</code> | 0.50 MB</div>
+        <div class="download-actions">
+          <a class="download-btn primary" href="PDFs/CO-lista-de-precios-detallada-2025.pdf" target="_blank" rel="noopener">Abrir PDF</a>
+          <a class="download-btn" href="PDFs/CO-lista-de-precios-detallada-2025.pdf" download>Descargar</a>
+        </div>
+      </article>
+
+      <article class="download-card">
+        <span class="badge">PDF / LATAM / 2025</span>
+        <h3>Sales Performance Plan Overview Infographic LATAM 2025</h3>
+        <p>Infografia oficial en PDF con el resumen visual del plan de compensacion para LATAM.</p>
+        <div class="download-meta">Archivo: <code>sales-performance-plan-overview-infographic-latam-2025.pdf</code> | 0.59 MB</div>
+        <div class="download-actions">
+          <a class="download-btn primary" href="PDFs/sales-performance-plan-overview-infographic-latam-2025.pdf" target="_blank" rel="noopener">Abrir PDF</a>
+          <a class="download-btn" href="PDFs/sales-performance-plan-overview-infographic-latam-2025.pdf" download>Descargar</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Buscar por nombre, categoria, descripcion o enlace">
+      <select id="category-filter">
+        <option value="">Todas las categorias</option>
+      </select>
+    </div>
+
+    <div class="params">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Categoria</th>
+            <th>Descripcion breve</th>
+            <th>Enlace oficial</th>
+            <th>Copiar</th>
+            <th>Imagen</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <div id="empty" class="note" hidden>
+      <p>No se encontraron resultados con ese filtro.</p>
+    </div>
+
+    <div class="footer">
+      Actualizado: 2026-03-18 20:57:22 -05:00
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="image-modal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <h2 id="modal-title" class="modal-title">Vista del producto</h2>
+        <button id="modal-close" class="modal-close" type="button">Cerrar</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-img-wrap">
+          <img id="modal-image" class="modal-img" alt="">
+        </div>
+        <p id="modal-caption" class="modal-caption"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const products = [{"Number":1,"Name":"ageLOC EnergEyes","Category":"Nu Skin Products / ageLOC","Description":"Revitaliza tu mirada con ageLOC Galvanic Spa EnergEyes.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50002109.html","ProductId":"50002109","ImageUrl":"https://nuskin.com/content/dam/office/n_america/US/en/nuskin_products/01002109-energeyes-box.jpg","ThumbnailUrl":"https://nuskin.com/content/dam/office/n_america/US/en/nuskin_products/01002109-energeyes-box.jpg","HasOfficialImage":true},{"Number":2,"Name":"ageLOC Product Brochure","Category":"Nu Skin Products / ageLOC","Description":"Producto de la linea ageLOC enfocado en cuidado personal y apariencia saludable de la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/ageloc_prod_brochure.html","ProductId":"","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":3,"Name":"ageLOC Product Brochure","Category":"Nu Skin Products / ageLOC","Description":"Producto de la linea ageLOC enfocado en cuidado personal y apariencia saludable de la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/prod_brochure.html","ProductId":"","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":4,"Name":"ageLOC Science Brochure","Category":"Nu Skin Products / ageLOC","Description":"Producto de la linea ageLOC enfocado en cuidado personal y apariencia saludable de la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/ageloc_science_brochure.html","ProductId":"","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":5,"Name":"ageLOC Science Brochure","Category":"Nu Skin Products / ageLOC","Description":"Producto de la linea ageLOC enfocado en cuidado personal y apariencia saludable de la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/science_brochure.html","ProductId":"","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":6,"Name":"ageLOC Transforming Night","Category":"Nu Skin Products / ageLOC","Description":"Producto de la linea ageLOC enfocado en cuidado personal y apariencia saludable de la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50003880.html","ProductId":"50003880","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":7,"Name":"ageLOC® Boost Activating Serum","Category":"Nu Skin Products / ageLOC","Description":"Formulado para funcionar con el dispositivo, ageLOC Boost Activating Serum te ayudará a conseguir un cutis radiante y juvenil.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50001928.html","ProductId":"50001928","ImageUrl":"https://media.nuskin.com/transform/230bf5d6-cb56-4a89-b91f-7b29327f5f36/Boost-1.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/230bf5d6-cb56-4a89-b91f-7b29327f5f36/Boost-1.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":8,"Name":"ageLOC® Boost Essentials","Category":"Nu Skin Products / ageLOC","Description":"Deja que tu piel luzca radiante con la más reciente innovación de Nu Skin.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50130367.html","ProductId":"50130367","ImageUrl":"https://media.nuskin.com/transform/e1c38bec-af29-4802-bc03-409cd6bf12a3/nu-skin-ageloc-boost-essentials-and-device-white-background.webp?quality=95\u0026io=transform:fit,width:600,height:600","ThumbnailUrl":"https://media.nuskin.com/transform/e1c38bec-af29-4802-bc03-409cd6bf12a3/nu-skin-ageloc-boost-essentials-and-device-white-background.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":9,"Name":"ageLOC® Tru Face® Essence Ultra","Category":"Nu Skin Products / ageLOC","Description":"Producto de la linea ageLOC enfocado en cuidado personal y apariencia saludable de la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50102892.html","ProductId":"50102892","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":10,"Name":"Cabezal ageLOC LumiSpa iO Rose Gold Accent","Category":"Nu Skin Products / ageLOC","Description":"El cabezal ageLOC LumiSpa iO Accent tiene una punta de tratamiento que está hecha de silicona suave y aplica la tecnología LumiSpa para moverse a la frecuencia precisa y promover...","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50002667.html","ProductId":"50002667","ImageUrl":"https://media.nuskin.com/m/3c82d21dcf08f7b2/webimage-Ageloc-lumispa-io-rose-gold-accent-2.png","ThumbnailUrl":"https://media.nuskin.com/m/3c82d21dcf08f7b2/thul-Ageloc-lumispa-io-rose-gold-accent-2.png","HasOfficialImage":true},{"Number":11,"Name":"Cargador para ageLOC® LumiSpa® iO","Category":"Nu Skin Products / ageLOC","Description":"Cargador magnético de repuesto para tu ageLOC LumiSpa iO.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50002442.html","ProductId":"50002442","ImageUrl":"https://nuskin.com/content/dam/global/library/oct2022/01002442-replacement-charger-pdp.jpg","ThumbnailUrl":"https://nuskin.com/content/dam/global/library/oct2022/01002442-replacement-charger-pdp.jpg","HasOfficialImage":true},{"Number":12,"Name":"Galvanic Spa® Stand","Category":"Nu Skin Products / ageLOC","Description":"Esta base esta diseñada para que puedas colocar tu ageLOC® Galvanic Spa® o ageLOC® Galvanic® Body Spa.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50001801.html","ProductId":"50001801","ImageUrl":"https://media.nuskin.com/m/136d583be49aabb9/webimage-nu-skin-galvanic-spa-stand-white-background.png","ThumbnailUrl":"https://media.nuskin.com/m/136d583be49aabb9/thul-nu-skin-galvanic-spa-stand-white-background.png","HasOfficialImage":true},{"Number":13,"Name":"Puntas de Silicona de ageLOC® LumiSpa® Accent (2pk)","Category":"Nu Skin Products / ageLOC","Description":"Producto de la linea ageLOC enfocado en cuidado personal y apariencia saludable de la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50001656.html","ProductId":"50001656","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":14,"Name":"Puntas de silicona de ageLOC® LumiSpa® iO Accent Rose Gold","Category":"Nu Skin Products / ageLOC","Description":"La punta de silicona suave para ageLOC LumiSpa iO Accent Rose Gold está diseñada para tratar con delicadeza la piel alrededor de los ojos.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ageloc/50002668.html","ProductId":"50002668","ImageUrl":"https://media.nuskin.com/transform/54d3cf1b-24d1-4ffe-b453-1d4cb929196c/ACCENT-X2.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/54d3cf1b-24d1-4ffe-b453-1d4cb929196c/ACCENT-X2.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":15,"Name":"50130410","Category":"Nu Skin Products / AP-24","Description":"Nuevo kit de AP24. Limpia los dientes sin peróxido, ayuda a evitar que la placa y las caries se formen y dañen los dientes.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ap24/50130410.html","ProductId":"50130410","ImageUrl":"https://media.nuskin.com/transform/d9a001db-26a6-439b-85f7-db1285fe5383/25130410_ap24.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/d9a001db-26a6-439b-85f7-db1285fe5383/25130410_ap24.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":16,"Name":"AP 24® 25pk","Category":"Nu Skin Products / AP-24","Description":"Da brillo a los dientes, sin los peróxidos nocivos y brinda una sensación duradera de tersura, limpieza y frescura.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ap24/50130027.html","ProductId":"50130027","ImageUrl":"https://media.nuskin.com/transform/3370183f-2c3c-481f-815b-9ebe277add66/Nu-Kit-del-Mes_Mar-NKMar_AP24-25PK_CO.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/3370183f-2c3c-481f-815b-9ebe277add66/Nu-Kit-del-Mes_Mar-NKMar_AP24-25PK_CO.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":17,"Name":"AP 24® Whitening Fluoride Toothpaste","Category":"Nu Skin Products / AP-24","Description":"¿Quieres una sonrisa más brillante? Prueba AP24 y luce unos dientes sensacionalmente blancos.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ap24/50001647.html","ProductId":"50001647","ImageUrl":"https://media.nuskin.com/transform/04985942-810c-4901-9f35-622ffcb0e56f/ap24-pdp.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/04985942-810c-4901-9f35-622ffcb0e56f/ap24-pdp.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":18,"Name":"AP24 Kit","Category":"Nu Skin Products / AP-24","Description":"Producto de higiene oral de la linea AP-24 para el cuidado diario.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/ap24/50130261.html","ProductId":"50130261","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":19,"Name":"Liquid Body Lufra","Category":"Nu Skin Products / Cuidado Corporal","Description":"Producto de cuidado corporal para apoyar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Cuidadocorporal/50102717.html","ProductId":"50102717","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":20,"Name":"50130413","Category":"Nu Skin Products / Epoch","Description":"Nuevo kit de Polishing Bar. Exfolia suavemente la piel con la corteza molida de Sisku\u0027pas, al mismo tiempo que la limpia y acondiciona con Barro Marino Glacial de origen renovable.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50130413.html","ProductId":"50130413","ImageUrl":"https://media.nuskin.com/transform/ab0de315-be23-45b4-becc-96f39591455c/Nu-Kit-del-Mes_Mar-NKMar_Polishing-SS_CL-CO-MX-PE.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/ab0de315-be23-45b4-becc-96f39591455c/Nu-Kit-del-Mes_Mar-NKMar_Polishing-SS_CL-CO-MX-PE.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":21,"Name":"Celltrex Always Right Recovery Fluid","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001791.html","ProductId":"50001791","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":22,"Name":"Celltrex Always Right Recovery Mask","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001792.html","ProductId":"50001792","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":23,"Name":"Day Away Micellar Beauty Water","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001782.html","ProductId":"50001782","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":24,"Name":"Day Dream Protective Cream SPF 35","Category":"Nu Skin Products / Epoch","Description":"Empieza a vivir tu sueño de tener una gran piel con la crema Day Dream Protective Cream.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001785.html","ProductId":"50001785","ImageUrl":"https://media.nuskin.com/transform/d300dde7-9344-4b81-be8a-5324658b721a/Nutricentials-Day-Dream-Protective-Cream-Creamy-Day-Moisturizer.webp?quality=95\u0026io=transform:fit,width:600,height:600","ThumbnailUrl":"https://media.nuskin.com/transform/d300dde7-9344-4b81-be8a-5324658b721a/Nutricentials-Day-Dream-Protective-Cream-Creamy-Day-Moisturizer.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":25,"Name":"Day Dream Protective Lotion SPF 35","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001786.html","ProductId":"50001786","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":26,"Name":"Epoch® Baobab Body Butter","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50102781.html","ProductId":"50102781","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":27,"Name":"Epoch® Hand Sanitizer","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50110833.html","ProductId":"50110833","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":28,"Name":"Epoch® Hand Sanitizer 6pk","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50130368.html","ProductId":"50130368","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":29,"Name":"Epoch® Polishing Bar","Category":"Nu Skin Products / Epoch","Description":"Exfolia tu piel mientras la limpias con Epoch Polishing Bar.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001994.html","ProductId":"50001994","ImageUrl":"https://media.nuskin.com/transform/62819a56-fd37-483f-9ebd-09280a81f9fa/epoch-body-bar-pdp-1.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/62819a56-fd37-483f-9ebd-09280a81f9fa/epoch-body-bar-pdp-1.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":30,"Name":"Epoch® Sole Solution Foot Treatment","Category":"Nu Skin Products / Epoch","Description":"Epoch Sole Solution es una crema humectante que restaura salud a los talones, dedos y plantas de los pies.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50101220.html","ProductId":"50101220","ImageUrl":"https://images.contentstack.io/v3/assets/blt7d4c4f4a1bf5a819/blt31925e31656437d1/6217ca5e8e2f9e3316bd06a8/01001988-single-sole-solution.jpg","ThumbnailUrl":"https://images.contentstack.io/v3/assets/blt7d4c4f4a1bf5a819/blt31925e31656437d1/6217ca5e8e2f9e3316bd06a8/01001988-single-sole-solution.jpg","HasOfficialImage":true},{"Number":31,"Name":"Epoch® Yin and Yang Kit 25pk","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50130404.html","ProductId":"50130404","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":32,"Name":"Epoch® Yin and Yang Mask","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50102837.html","ProductId":"50102837","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":33,"Name":"HydraClean Creamy Cleansing Lotion","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001780.html","ProductId":"50001780","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":34,"Name":"Moisturize Me Intense Hydrate Cream","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001793.html","ProductId":"50001793","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":35,"Name":"ThirstFix Hydrating Gel Cream","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001787.html","ProductId":"50001787","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":36,"Name":"To Be Clear Pure Cleansing Gel","Category":"Nu Skin Products / Epoch","Description":"Producto de cuidado personal de la linea Epoch pensado para bienestar y uso cotidiano.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/Epoch/50001781.html","ProductId":"50001781","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":37,"Name":"ageLOC Body Shaping Gel","Category":"Nu Skin Products / Galvanic Spa","Description":"Producto o accesorio de la linea Galvanic Spa para complementar la rutina de cuidado.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/galvanic_spa/50003902.html","ProductId":"50003902","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":38,"Name":"ageLOC Dermatic Effects","Category":"Nu Skin Products / Galvanic Spa","Description":"Por un aspecto más liso y contorneado.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/galvanic_spa/50003903.html","ProductId":"50003903","ImageUrl":"https://images.contentstack.io/v3/assets/blt7d4c4f4a1bf5a819/blt62eea48229395f25/615b1bf922304e4f2b379216/nu-skin-ageloc-dermatic-effects-contouring-moisturizer-pdp-1.jpg","ThumbnailUrl":"https://images.contentstack.io/v3/assets/blt7d4c4f4a1bf5a819/blt62eea48229395f25/615b1bf922304e4f2b379216/nu-skin-ageloc-dermatic-effects-contouring-moisturizer-pdp-1.jpg","HasOfficialImage":true},{"Number":39,"Name":"Geles Faciales Galvanic Spa en Suscripción","Category":"Nu Skin Products / Galvanic Spa","Description":"Agrega tus Geles Faciales Galvanic Spa a una Suscripción mensual y disfruta de sus beneficios: un tratamiento avanzado para reducir la aparición de los signos de la edad,...","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/galvanic_spa/50130427.html","ProductId":"50130427","ImageUrl":"https://nuskin.com/content/dam/la/promotion-images/September2022/50130427-galvanic-gel-subscripcion.jpg","ThumbnailUrl":"https://nuskin.com/content/dam/la/promotion-images/September2022/50130427-galvanic-gel-subscripcion.jpg","HasOfficialImage":true},{"Number":40,"Name":"Kit Firmeza y Contorno Corporal - ageLOC® Body Spa","Category":"Nu Skin Products / Galvanic Spa","Description":"Producto o accesorio de la linea Galvanic Spa para complementar la rutina de cuidado.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/galvanic_spa/50129948.html","ProductId":"50129948","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":41,"Name":"Paquete de ADR Facial","Category":"Nu Skin Products / Galvanic Spa","Description":"Producto o accesorio de la linea Galvanic Spa para complementar la rutina de cuidado.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/galvanic_spa/50000961.html","ProductId":"50000961","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":42,"Name":"NaPCA Moisture Mist","Category":"Nu Skin Products / Humectantes","Description":"Refrescante rocío lleno de acondicionadores para la piel y el cabello que te ayudan a retener la humedad que requieres. Frescura de rocío en la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/moisturizers/50101226.html","ProductId":"50101226","ImageUrl":"https://media.nuskin.com/transform/51da91f4-2013-470c-8f98-23e181276fab/napca-pdp.webp?quality=95\u0026io=transform:fit,width:600,height:600","ThumbnailUrl":"https://media.nuskin.com/transform/51da91f4-2013-470c-8f98-23e181276fab/napca-pdp.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":43,"Name":"Rejuvenating Cream","Category":"Nu Skin Products / Humectantes","Description":"Producto humectante pensado para apoyar la hidratacion diaria de la piel.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/moisturizers/50110258.html","ProductId":"50110258","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":44,"Name":"ageLOC® PowerMask","Category":"Nu Skin Products / Mascarillas y Exfoliantes","Description":"Producto para complementar la rutina facial con limpieza o renovacion.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/mascarillas-y-exfoliantes/50002108.html","ProductId":"50002108","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":45,"Name":"Waterfull Mask","Category":"Nu Skin Products / Mascarillas y Exfoliantes","Description":"Producto para complementar la rutina facial con limpieza o renovacion.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/mascarillas-y-exfoliantes/50125179.html","ProductId":"50125179","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":46,"Name":"Bolsa de Dama NS","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50129421.html","ProductId":"50129421","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":47,"Name":"Bote de Agua con Pastillero","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50005748.html","ProductId":"50005748","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":48,"Name":"Cartera para hombre NS","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50129422.html","ProductId":"50129422","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":49,"Name":"Cosmetiquera Zebra","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/90024549.html","ProductId":"90024549","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":50,"Name":"El Mito del Envejecimiento (The Aging Myth)","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50007477.html","ProductId":"50007477","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":51,"Name":"Folletos de ageLOC Me 5pk","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50129890.html","ProductId":"50129890","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":52,"Name":"Gafas de Sol","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50005749.html","ProductId":"50005749","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":53,"Name":"Neceser de Nu Skin","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50005750.html","ProductId":"50005750","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":54,"Name":"Palo para Selfie","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50005747.html","ProductId":"50005747","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":55,"Name":"Postales de ageLOC Me 5pk","Category":"Nu Skin Products / MATERIALES DE APOYO","Description":"Material de apoyo oficial para acompanar presentaciones, promocion o trabajo comercial.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/shop_all/marketing_materials/50129888.html","ProductId":"50129888","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":56,"Name":"Nu Skin 180 Face Wash","Category":"Nu Skin Products / Nu Skin 180","Description":"¿Lista para comenzar la batalla contra el envejecimiento ambiental?","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/180/50101251.html","ProductId":"50101251","ImageUrl":"https://media.nuskin.com/transform/618279af-2418-40c9-baf6-a19eb85d2094/face-wash-pdp-1.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/618279af-2418-40c9-baf6-a19eb85d2094/face-wash-pdp-1.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":57,"Name":"Day Away Micellar Beauty Water Mini","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50002603.html","ProductId":"50002603","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":58,"Name":"KIT LIP \u0026 EYE MASK – POR TIEMPO LIMITADO","Category":"Nu Skin Products / Nutricentials","Description":"Dile adiós a los ojos de aspecto cansado y consigue unos labios perfectos con el nuevo Kit Lip \u0026 Eye Mask de Nutricentials.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50130481.html","ProductId":"50130481","ImageUrl":"https://media.nuskin.com/m/6d9547bc864b82a/webimage-Kit-Lip-Mask-PDP-1.png","ThumbnailUrl":"https://media.nuskin.com/m/6d9547bc864b82a/thul-Kit-Lip-Mask-PDP-1.png","HasOfficialImage":true},{"Number":59,"Name":"Kit Nutri Serums (kit temporal)","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50130452.html","ProductId":"50130452","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":60,"Name":"Kit Social Seller Vitamina C + Colágeno","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50130471.html","ProductId":"50130471","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":61,"Name":"Nutricentials Pumps Vitamin C + Collagen (Serum facial hidratante e iluminador)","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50002527.html","ProductId":"50002527","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":62,"Name":"NUTRICENTIALS® HYDRATING LIP MASK – POR TIEMPO LIMITADO","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50002556.html","ProductId":"50002556","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":63,"Name":"NUTRICENTIALS® HYDRATING UNDER-EYE MASK - POR TIEMPO LIMITADO","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50002557.html","ProductId":"50002557","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":64,"Name":"Nutricentials® Pumps Bakuchiol","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50002416.html","ProductId":"50002416","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":65,"Name":"Nutricentials® Pumps Ceramides + Postbiotics (Serum Facial)","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50002405.html","ProductId":"50002405","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":66,"Name":"Nutricentials® Pumps Hyaluronic Acid + B5","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50002403.html","ProductId":"50002403","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":67,"Name":"Pillow Glow + Eye Love (Kit Temporal)","Category":"Nu Skin Products / Nutricentials","Description":"Producto de cuidado facial de la linea Nutricentials para complementar la rutina diaria.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/nutricentials/50130439.html","ProductId":"50130439","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":68,"Name":"ageLOC® Tru Face® Essence Ultra","Category":"Nu Skin Products / Tru Face","Description":"Producto de la linea Tru Face enfocado en el cuidado del rostro.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/tru_face/50102892.html","ProductId":"50102892","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":69,"Name":"ageLOC® Tru Face® Uplifting Cream","Category":"Nu Skin Products / Tru Face","Description":"Producto de la linea Tru Face enfocado en el cuidado del rostro.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/tru_face/50102945.html","ProductId":"50102945","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":70,"Name":"Tru Face® Line Corrector","Category":"Nu Skin Products / Tru Face","Description":"Producto de la linea Tru Face enfocado en el cuidado del rostro.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/nuskin/tru_face/50102704.html","ProductId":"50102704","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":71,"Name":"Collagen+","Category":"Pharmanex Products / Mas Productos","Description":"¿Todo listo para sentir la belleza interna y externa?","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/50002282.html","ProductId":"50002282","ImageUrl":"https://media.nuskin.com/m/952db9331e5d08c/webimage-Pharmanex-beauty-focus-collagen-plus-ready-to-drink-carousel-1-product.png","ThumbnailUrl":"https://media.nuskin.com/m/952db9331e5d08c/thul-Pharmanex-beauty-focus-collagen-plus-ready-to-drink-carousel-1-product.png","HasOfficialImage":true},{"Number":72,"Name":"Collagen+ Suscripcion","Category":"Pharmanex Products / Mas Productos","Description":"Agrega tu Collagen+ a una suscripción mensual y disfruta de sus increíbles beneficios: te ayudará a mejorar la ingesta de péptidos, ceramidas y luteína, un compuesto que ayuda a...","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/50130456.html","ProductId":"50130456","ImageUrl":"https://media.nuskin.com/transform/a81d7aeb-3ecb-498f-a431-2cbd03d91338/co-collagen-pdp-subs.webp?quality=95\u0026io=transform:fit,width:980,height:980","ThumbnailUrl":"https://media.nuskin.com/transform/a81d7aeb-3ecb-498f-a431-2cbd03d91338/co-collagen-pdp-subs.webp?quality=95\u0026io=transform:fill,width:250,height:250","HasOfficialImage":true},{"Number":73,"Name":"Kit Galvanic Face Spa Essentials","Category":"Pharmanex Products / Mas Productos","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/50130453.html","ProductId":"50130453","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":74,"Name":"Kit No te detengas – Protein Boost","Category":"Pharmanex Products / Mas Productos","Description":"Kit No te detengas – Vainilla","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/50130424.html","ProductId":"50130424","ImageUrl":"https://nuskin.com/content/dam/la/promotion-images/march2022/50130424-no-te-detengas-protein-boost.jpg","ThumbnailUrl":"https://nuskin.com/content/dam/la/promotion-images/march2022/50130424-no-te-detengas-protein-boost.jpg","HasOfficialImage":true},{"Number":75,"Name":"Kit Toma el Control – Protein Boost","Category":"Pharmanex Products / Mas Productos","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/50130422.html","ProductId":"50130422","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":76,"Name":"Productos de ageLOC TR90®","Category":"Pharmanex Products / Mas Productos","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/tr90_products.html","ProductId":"","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":77,"Name":"Soluciones Dirigidas a Necesidades Específicas","Category":"Pharmanex Products / Mas Productos","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/targeted_treatments.html","ProductId":"","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":78,"Name":"ADR TR90 Shakes","Category":"Pharmanex Products / TR90","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/tr90_products/50129631.html","ProductId":"50129631","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":79,"Name":"Comienza TR90 – Chocolate","Category":"Pharmanex Products / TR90","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/tr90_products/50129956.html","ProductId":"50129956","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":80,"Name":"Comienza TR90 – Vainilla","Category":"Pharmanex Products / TR90","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/tr90_products/50129957.html","ProductId":"50129957","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":81,"Name":"Productos MV30","Category":"Pharmanex Products / TR90","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/tr90_products/productos-mv30.html","ProductId":"","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":82,"Name":"TR90 Shake Chocolate","Category":"Pharmanex Products / TR90","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/tr90_products/50003748.html","ProductId":"50003748","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false},{"Number":83,"Name":"TR90 Shake Vainilla","Category":"Pharmanex Products / TR90","Description":"Producto de la linea Pharmanex orientado a nutricion, bienestar o apoyo de estilo de vida.","Link":"https://www.nuskin.com/content/nuskin/es_CO/products/shop/pharmanex/tr90_products/50003749.html","ProductId":"50003749","ImageUrl":"","ThumbnailUrl":"","HasOfficialImage":false}];
+    const rows = document.getElementById('rows');
+    const empty = document.getElementById('empty');
+    const searchInput = document.getElementById('search');
+    const categoryFilter = document.getElementById('category-filter');
+    const visibleCount = document.getElementById('visible-count');
+    const toast = document.getElementById('toast');
+    const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCaption = document.getElementById('modal-caption');
+    const modalClose = document.getElementById('modal-close');
+
+    const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[char]));
+
+    const categories = [...new Set(products.map((product) => product.Category))].sort((a, b) => a.localeCompare(b));
+    categories.forEach((category) => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      categoryFilter.appendChild(option);
+    });
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    async function copyLink(link) {
+      try {
+        await navigator.clipboard.writeText(link);
+        showToast('Enlace copiado');
+      } catch (error) {
+        const helper = document.createElement('textarea');
+        helper.value = link;
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand('copy');
+        helper.remove();
+        showToast('Enlace copiado');
+      }
+    }
+
+    function buildPlaceholder(product) {
+      const title = product.Name;
+      const category = product.Category.split(' / ').slice(-1)[0];
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+          <defs>
+            <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#eef7ff" />
+              <stop offset="100%" stop-color="#d8ecff" />
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="900" fill="url(#g)" />
+          <circle cx="200" cy="180" r="170" fill="#ffffff" opacity="0.5" />
+          <circle cx="980" cy="730" r="190" fill="#ffffff" opacity="0.35" />
+          <rect x="110" y="120" width="980" height="660" rx="36" fill="#ffffff" opacity="0.84" />
+          <text x="160" y="240" fill="#1565c0" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">NU SKIN COLOMBIA</text>
+          <text x="160" y="360" fill="#23272f" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700">${escapeHtml(title)}</text>
+          <text x="160" y="450" fill="#2e7d32" font-family="Segoe UI, Arial, sans-serif" font-size="34">${escapeHtml(category)}</text>
+          <text x="160" y="560" fill="#607d8b" font-family="Segoe UI, Arial, sans-serif" font-size="28">Vista placeholder cuando no hay imagen oficial disponible.</text>
+        </svg>
+      `;
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function openImage(product) {
+      const imageUrl = product.ImageUrl || buildPlaceholder(product);
+      modalImage.src = imageUrl;
+      modalImage.alt = product.Name;
+      modalTitle.textContent = product.Name;
+      modalCaption.textContent = `${product.Category} | ${product.Description}`;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      modalImage.src = '';
+      document.body.style.overflow = '';
+    }
+
+    function render() {
+      const search = searchInput.value.trim().toLowerCase();
+      const selectedCategory = categoryFilter.value;
+
+      const filtered = products.filter((product) => {
+        const haystack = `${product.Name} ${product.Category} ${product.Description} ${product.Link}`.toLowerCase();
+        const matchesSearch = !search || haystack.includes(search);
+        const matchesCategory = !selectedCategory || product.Category === selectedCategory;
+        return matchesSearch && matchesCategory;
+      });
+
+      visibleCount.textContent = filtered.length;
+
+      if (!filtered.length) {
+        rows.innerHTML = '';
+        empty.hidden = false;
+        return;
+      }
+
+      empty.hidden = true;
+      rows.innerHTML = filtered.map((product) => `
+        <tr>
+          <td>${product.Number}</td>
+          <td><div class="name">${escapeHtml(product.Name)}</div></td>
+          <td><span class="badge">${escapeHtml(product.Category)}</span></td>
+          <td>${escapeHtml(product.Description)}</td>
+          <td>
+            <a class="link" href="${escapeHtml(product.Link)}" target="_blank" rel="noopener">Abrir enlace oficial</a>
+            <span class="url">${escapeHtml(product.Link)}</span>
+          </td>
+          <td><button class="copy-btn" type="button" data-link="${escapeHtml(product.Link)}">Copiar</button></td>
+          <td>
+            <button
+              class="img-btn ${product.HasOfficialImage ? '' : 'empty'}"
+              type="button"
+              data-number="${product.Number}"
+              title="${product.HasOfficialImage ? 'Ver imagen oficial' : 'Ver vista placeholder'}"
+            >&#x1F5BC;</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    searchInput.addEventListener('input', render);
+    categoryFilter.addEventListener('change', render);
+
+    rows.addEventListener('click', (event) => {
+      const copyButton = event.target.closest('.copy-btn');
+      if (copyButton) {
+        copyLink(copyButton.dataset.link);
+        return;
+      }
+
+      const imageButton = event.target.closest('.img-btn');
+      if (imageButton) {
+        const number = Number(imageButton.dataset.number);
+        const product = products.find((item) => item.Number === number);
+        if (product) {
+          openImage(product);
+        }
+      }
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modal.hidden) {
+        closeModal();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>

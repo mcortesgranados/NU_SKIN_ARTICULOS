@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4efe8"/>
+      <stop offset="48%" stop-color="#dcefe5"/>
+      <stop offset="100%" stop-color="#9fd2be"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="20%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="82%" cy="74%" r="48%">
+      <stop offset="0%" stop-color="#fff0dc" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#fff0dc" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .kicker { font: 700 34px 'Aptos', 'Trebuchet MS', sans-serif; letter-spacing: 0.32em; fill: #1b5b54; }
+      .title { font: 700 168px 'Palatino Linotype', 'Book Antiqua', Georgia, serif; fill: #163934; }
+      .subtitle { font: 400 54px 'Aptos', 'Trebuchet MS', sans-serif; fill: #234842; }
+      .chip { font: 700 34px 'Aptos', 'Trebuchet MS', sans-serif; fill: #163934; }
+      .note { font: 500 30px 'Aptos', 'Trebuchet MS', sans-serif; fill: #31554f; }
+    </style>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <circle cx="210" cy="220" r="360" fill="url(#glowA)"/>
+  <circle cx="910" cy="1420" r="430" fill="url(#glowB)"/>
+  <circle cx="930" cy="300" r="120" fill="#ffffff" opacity="0.28"/>
+  <circle cx="160" cy="1570" r="190" fill="#ffffff" opacity="0.24"/>
+  <path d="M0 1530C180 1465 308 1458 442 1512C604 1578 742 1655 1080 1568V1920H0Z" fill="#134b45" opacity="0.16"/>
+  <path d="M0 1666C214 1596 362 1612 514 1660C692 1717 832 1766 1080 1698V1920H0Z" fill="#0f6156" opacity="0.12"/>
+
+  <rect x="90" y="128" width="900" height="4" rx="2" fill="#35645f" opacity="0.35"/>
+  <text x="100" y="208" class="kicker">NU SKIN / AGELOC</text>
+
+  <text x="100" y="580" class="title">YOUTH</text>
+
+  <text x="100" y="720" class="subtitle">
+    <tspan x="100" dy="0">Cuidado diario para quienes buscan</tspan>
+    <tspan x="100" dy="78">una rutina de bienestar con</tspan>
+    <tspan x="100" dy="78">enfoque integral.</tspan>
+  </text>
+
+  <rect x="100" y="1015" width="245" height="84" rx="42" fill="#ffffff" opacity="0.88"/>
+  <rect x="364" y="1015" width="280" height="84" rx="42" fill="#ffffff" opacity="0.88"/>
+  <rect x="663" y="1015" width="318" height="84" rx="42" fill="#ffffff" opacity="0.88"/>
+  <text x="222" y="1068" text-anchor="middle" class="chip">Omega-3</text>
+  <text x="504" y="1068" text-anchor="middle" class="chip">Antioxidantes</text>
+  <text x="822" y="1068" text-anchor="middle" class="chip">Formula integral</text>
+
+  <text x="100" y="1300" class="note">
+    <tspan x="100" dy="0">Disenado para formato vertical 1080 x 1920.</tspan>
+    <tspan x="100" dy="58">Ideal para compartir como estado de WhatsApp.</tspan>
+  </text>
+
+  <text x="100" y="1770" class="note">YOUTH by Nu Skin</text>
+  <text x="100" y="1824" class="note">Pieza 01 / Hero visual</text>
+</svg>

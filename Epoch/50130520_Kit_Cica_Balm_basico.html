@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>50130520 | Kit Cica Balm básico</title>
+  <style>
+    :root {
+      --bg: #f6f8f7;
+      --card: #ffffff;
+      --text: #1d2a2d;
+      --muted: #5e6b70;
+      --line: #d8dedd;
+      --brand: #0f766e;
+      --accent: #d97706;
+      --soft: #e8f6f3;
+      --warn: #fff8e8;
+      --shadow: 0 14px 34px rgba(20, 40, 44, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.10), transparent 24%),
+        linear-gradient(180deg, #fbfcfb 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+    a { color: #0b62c4; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 24px 14px 48px; }
+    .hero, .card, .note {
+      background: var(--card);
+      border: 1px solid rgba(29, 42, 45, 0.08);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 22px;
+      padding: 24px;
+      margin-bottom: 18px;
+      align-items: center;
+    }
+    .shot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+      border-radius: 16px;
+      border: 1px solid #d9ece7;
+      background: linear-gradient(180deg, #f4fbfa 0%, #eef7f5 100%);
+      padding: 12px;
+    }
+    .shot img { width: 100%; max-width: 180px; height: auto; object-fit: contain; }
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--brand);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    h1 {
+      margin: 14px 0 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.03;
+      color: #12423e;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.35rem;
+      color: #12423e;
+    }
+    p, li {
+      line-height: 1.65;
+      color: #334447;
+    }
+    .subtitle { margin: 0 0 14px; color: var(--muted); }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 15px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+    .btn.primary { background: var(--brand); color: #fff; }
+    .btn.secondary { background: #fff7ed; border-color: #fed7aa; color: #9a4e07; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: #f4f7f7;
+      font-size: 0.9rem;
+      color: #415255;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .card { padding: 20px; }
+    .col-12 { grid-column: span 12; }
+    .col-8 { grid-column: span 8; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fbfcfc;
+    }
+    .kpi small {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .kpi strong {
+      display: block;
+      font-size: 1.15rem;
+      color: #12423e;
+      margin-bottom: 6px;
+    }
+    .note {
+      padding: 18px 20px;
+      background: var(--warn);
+      border-color: #fde6b6;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+      margin-top: 10px;
+    }
+    .data-table th,
+    .data-table td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .data-table th { background: #f1f7f6; }
+    .legend-badge {
+      display: inline-flex;
+      min-width: 58px;
+      justify-content: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--brand);
+      font-weight: 800;
+    }
+    .source-list { margin: 0; padding-left: 18px; }
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    code {
+      background: #f3f5f5;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.93em;
+    }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .col-8, .col-6, .col-4 { grid-column: span 12; }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .page { padding: 14px 10px 30px; }
+      .hero, .card, .note { padding: 16px; }
+      .data-table { display: block; overflow-x: auto; }
+      .kpis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="shot">
+        <img src="https://media.nuskin.com/transform/0edc1cbe-c4a3-4adf-919f-6c1e96179bea/cica-balm-3pk.webp?quality=95&amp;io=transform:fit,width:600,height:600" alt="Kit Cica Balm básico">
+      </div>
+      <div>
+        <span class="eyebrow">SKU 50130520 · Epoch</span>
+        <h1>Kit Cica Balm básico</h1>
+        <p class="subtitle">Kit Cica Balm básico forma parte de la categoria Epoch de Nu Skin. Pertenece a cuidado personal y requiere una explicacion clara del paso que ocupa dentro de la rutina. Se presenta como kit, asi que la venta funciona mejor cuando se explica el valor conjunto y la comodidad de comprar varios pasos a la vez.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://www.nuskin.com/content/nuskin/es_CO/products/product.50130520.html" target="_blank" rel="noreferrer">Producto oficial</a>
+          <a class="btn secondary" href="../lista-precios-detallada-2025.html">Volver a la lista</a>
+          <a class="btn secondary" href="../PDFs/CO-lista-de-precios-detallada-2025.pdf" target="_blank" rel="noreferrer">PDF 2025</a>
+        </div>
+        <div class="tags">
+          <span class="tag">Epoch</span><span class="tag">Formato kit</span><span class="tag">Imagen oficial</span><span class="tag">Publico COP 340.000</span><span class="tag">Miembro COP 262.500</span>
+        </div>
+        <div class="kpis">
+          <div class="kpi">
+            <small>Precio Público</small>
+            <strong>COP 340.000</strong>
+            <span>Precio de referencia al cliente final en la lista 2025.</span>
+          </div>
+          <div class="kpi">
+            <small>Precio Miembro</small>
+            <strong>COP 262.500</strong>
+            <span>Base para compra interna, paquete o cierre relacional.</span>
+          </div>
+          <div class="kpi">
+            <small>Spread Directo</small>
+            <strong>COP 77.500</strong>
+            <span>Equivale a 29,5% de markup sobre el precio miembro.</span>
+          </div>
+          <div class="kpi">
+            <small>Volumen</small>
+            <strong>VCV COP 148.800</strong>
+            <span>VV 40,0 · Bono minorista COP 65.126.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card col-8">
+        <h2>Resumen Comercial</h2>
+        <p>Este SKU entra por rutina, constancia y expectativa realista. En cuidado facial gana mas cuando el cliente entiende en que paso entra, que sensacion deja y como se complementa con otros productos.</p>
+        <ul>
+          <li>Explicar si va en AM, PM o como tratamiento puntual.</li><li>Usar antes y despues etico, prueba social y experiencia personal.</li><li>Evitar promesas medicas; hablar de apariencia, sensacion y disciplina.</li><li>Si es kit, vender comodidad y coherencia de rutina completa.</li>
+        </ul>
+      </article>
+
+      <aside class="note col-4">
+        <strong>Lectura corta:</strong>
+        <p>No vender solo el frasco; vender el paso correcto dentro de la rutina.</p>
+      </aside>
+    </section>
+
+    <section class="grid">
+      <article class="card col-12">
+        <h2>Convención Del Esquema De Ganancias</h2>
+        <p>
+          En la lista oficial de precios, las columnas <code>4%</code>, <code>8%</code>, <code>12%</code>, <code>16%</code>, <code>20%</code> y <code>24%</code>
+          son montos de referencia para bonos por compartir y referir. Se leen junto con <code>Precio Miembro sin Impuesto</code>,
+          <code>VCV</code>, <code>VV</code> y <code>Bono minorista sin Impuesto</code>.
+        </p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Porcentaje</th>
+              <th>Qué representa</th>
+              <th>Valor en este SKU</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+<td><span class="legend-badge">4%</span></td>
+<td>Escalon base de referencia del bono por compartir o referir.</td>
+<td>COP 8.823,5</td>
+</tr><tr>
+<td><span class="legend-badge">8%</span></td>
+<td>Nivel intermedio calculado sobre el Precio Miembro sin Impuesto.</td>
+<td>COP 17.647,1</td>
+</tr><tr>
+<td><span class="legend-badge">12%</span></td>
+<td>Escalon medio dentro del esquema variable mostrado en la lista.</td>
+<td>COP 26.470,6</td>
+</tr><tr>
+<td><span class="legend-badge">16%</span></td>
+<td>Nivel alto de referencia para compartir y referir.</td>
+<td>COP 35.294,1</td>
+</tr><tr>
+<td><span class="legend-badge">20%</span></td>
+<td>Tope del bono por venta mostrado en el material LATAM 2025.</td>
+<td>COP 44.117,6</td>
+</tr><tr>
+<td><span class="legend-badge">24%</span></td>
+<td>Escenario maximo del bono por compartir de afiliado directo en la referencia visual.</td>
+<td>COP 52.941,2</td>
+</tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card col-6">
+        <h2>Detalle De Precios 2025</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Campo</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+<td>Precio Publico</td>
+<td>COP 340.000</td>
+</tr><tr>
+<td>Precio Publico sin Impuesto</td>
+<td>COP 285.714</td>
+</tr><tr>
+<td>Precio Miembro</td>
+<td>COP 262.500</td>
+</tr><tr>
+<td>Precio Miembro sin Impuesto</td>
+<td>COP 220.588</td>
+</tr><tr>
+<td>Bono minorista sin Impuesto</td>
+<td>COP 65.126</td>
+</tr><tr>
+<td>VCV</td>
+<td>COP 148.800</td>
+</tr><tr>
+<td>VV</td>
+<td>40,0</td>
+</tr><tr>
+<td>4%</td>
+<td>COP 8.823,5</td>
+</tr><tr>
+<td>8%</td>
+<td>COP 17.647,1</td>
+</tr><tr>
+<td>12%</td>
+<td>COP 26.470,6</td>
+</tr><tr>
+<td>16%</td>
+<td>COP 35.294,1</td>
+</tr><tr>
+<td>20%</td>
+<td>COP 44.117,6</td>
+</tr><tr>
+<td>24%</td>
+<td>COP 52.941,2</td>
+</tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card col-6">
+        <h2>Promoción En WhatsApp Y Redes</h2>
+        <ul>
+          <li>Story corta: problema visible, producto, CTA para recibir precio.</li><li>Reel o video corto mostrando el paso dentro de la rutina.</li><li>Responder objeciones con tiempo de uso y forma de aplicacion.</li><li>Cerrar con pregunta concreta: quieres rutina basica o completa.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card col-12">
+        <h2>Fuentes Y Metodología</h2>
+        <ul class="source-list">
+          <li><a href="https://www.nuskin.com/content/nuskin/es_CO/products/product.50130520.html" target="_blank" rel="noreferrer">Nu Skin Colombia · pagina oficial del SKU 50130520</a></li><li><a href="../lista-precios-detallada-2025.html" target="_blank" rel="noreferrer">Lista web de precios 2025</a></li><li><a href="../PDFs/CO-lista-de-precios-detallada-2025.pdf" target="_blank" rel="noreferrer">Lista detallada oficial Colombia 2025</a></li><li><a href="../PDFs/sales-performance-plan-overview-infographic-latam-2025.pdf" target="_blank" rel="noreferrer">Sales Performance Plan Overview LATAM 2025</a></li>
+        </ul>
+        <p>
+          <strong>Nota metodológica:</strong> esta ficha resume la fila del SKU <strong>50130520</strong> en la lista de precios 2025
+          y añade una lectura comercial automatizada basada en la categoría, el formato del producto y sus precios publicados.
+          No reemplaza la comunicación oficial de Nu Skin ni introduce claims médicos o de resultados garantizados.
+        </p>
+      </article>
+    </section>
+
+    <p class="footer">Pagina generada automaticamente el 19 de marzo de 2026 a partir de la lista oficial 2025, el catalogo de Nu Skin Colombia y los metadatos disponibles del producto.</p>
+  </main>
+</body>
+</html>

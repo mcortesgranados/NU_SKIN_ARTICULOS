@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eff7f4"/>
+      <stop offset="58%" stop-color="#d9efe7"/>
+      <stop offset="100%" stop-color="#bddfd6"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5fbf8"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 700 30px 'Aptos', 'Trebuchet MS', sans-serif; letter-spacing: 0.26em; fill: #2f5f58; }
+      .title { font: 700 92px 'Palatino Linotype', 'Book Antiqua', Georgia, serif; fill: #163934; }
+      .subtitle { font: 400 38px 'Aptos', 'Trebuchet MS', sans-serif; fill: #446862; }
+      .blockLabel { font: 700 42px 'Aptos', 'Trebuchet MS', sans-serif; fill: #4b6b66; letter-spacing: 0.16em; }
+      .blockBig { font: 700 120px 'Palatino Linotype', 'Book Antiqua', Georgia, serif; fill: #173b36; }
+      .blockBody { font: 400 34px 'Aptos', 'Trebuchet MS', sans-serif; fill: #456660; }
+      .foot { font: 500 28px 'Aptos', 'Trebuchet MS', sans-serif; fill: #41635c; }
+    </style>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <circle cx="920" cy="220" r="170" fill="#ffffff" opacity="0.42"/>
+  <circle cx="120" cy="260" r="90" fill="#ffffff" opacity="0.34"/>
+  <circle cx="980" cy="1680" r="200" fill="#ffffff" opacity="0.28"/>
+  <path d="M0 1470C176 1408 324 1406 470 1460C656 1530 836 1594 1080 1530V1920H0Z" fill="#0d5951" opacity="0.12"/>
+
+  <text x="100" y="164" class="kicker">YOUTH / RUTINA DIARIA</text>
+  <text x="100" y="314" class="title">Rutina sugerida</text>
+  <text x="100" y="436" class="subtitle">
+    <tspan x="100" dy="0">Segun la ficha de este proyecto, el uso</tspan>
+    <tspan x="100" dy="54">consultado fue de 2 capsulas con la comida</tspan>
+    <tspan x="100" dy="54">de la manana y 2 capsulas por la noche.</tspan>
+  </text>
+
+  <rect x="100" y="710" width="880" height="410" rx="46" fill="url(#panel)"/>
+  <text x="160" y="808" class="blockLabel">MANANA</text>
+  <text x="160" y="948" class="blockBig">2</text>
+  <text x="298" y="894" class="blockBody">
+    <tspan x="298" dy="0">capsulas con</tspan>
+    <tspan x="298" dy="48">la comida</tspan>
+  </text>
+  <circle cx="874" cy="808" r="58" fill="#e9f6f0"/>
+  <circle cx="854" cy="808" r="36" fill="#9bcdb6"/>
+  <circle cx="894" cy="808" r="36" fill="#f5e6cf"/>
+
+  <rect x="100" y="1170" width="880" height="410" rx="46" fill="url(#panel)"/>
+  <text x="160" y="1268" class="blockLabel">NOCHE</text>
+  <text x="160" y="1408" class="blockBig">2</text>
+  <text x="298" y="1354" class="blockBody">
+    <tspan x="298" dy="0">capsulas con</tspan>
+    <tspan x="298" dy="48">la comida</tspan>
+  </text>
+  <circle cx="874" cy="1268" r="58" fill="#e9f6f0"/>
+  <circle cx="854" cy="1268" r="36" fill="#9bcdb6"/>
+  <circle cx="894" cy="1268" r="36" fill="#f5e6cf"/>
+
+  <text x="100" y="1758" class="foot">
+    <tspan x="100" dy="0">Revisa siempre la etiqueta final, el pais de venta y la fecha.</tspan>
+    <tspan x="100" dy="44">La presentacion puede variar segun mercado.</tspan>
+  </text>
+
+  <text x="100" y="1824" class="foot">Pieza 03 / Rutina</text>
+</svg>

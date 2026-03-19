@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbf4ea"/>
+      <stop offset="48%" stop-color="#e8f4ee"/>
+      <stop offset="100%" stop-color="#d4eadf"/>
+    </linearGradient>
+    <linearGradient id="cta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#174842"/>
+      <stop offset="100%" stop-color="#2d6d63"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 700 30px 'Aptos', 'Trebuchet MS', sans-serif; letter-spacing: 0.24em; fill: #2e5e57; }
+      .title { font: 700 96px 'Palatino Linotype', 'Book Antiqua', Georgia, serif; fill: #183b36; }
+      .subtitle { font: 400 38px 'Aptos', 'Trebuchet MS', sans-serif; fill: #426761; }
+      .chipText { font: 700 30px 'Aptos', 'Trebuchet MS', sans-serif; fill: #173b36; }
+      .ctaTitle { font: 700 72px 'Palatino Linotype', 'Book Antiqua', Georgia, serif; fill: #ffffff; }
+      .ctaBody { font: 400 36px 'Aptos', 'Trebuchet MS', sans-serif; fill: #e6f3ee; }
+      .foot { font: 500 28px 'Aptos', 'Trebuchet MS', sans-serif; fill: #41635c; }
+    </style>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <circle cx="220" cy="170" r="180" fill="#ffffff" opacity="0.55"/>
+  <circle cx="930" cy="310" r="110" fill="#ffffff" opacity="0.4"/>
+  <circle cx="890" cy="1600" r="240" fill="#ffffff" opacity="0.24"/>
+  <path d="M0 0H1080V250C976 324 884 352 770 344C648 336 566 286 444 276C278 264 156 320 0 454Z" fill="#cfe7db" opacity="0.46"/>
+
+  <text x="100" y="164" class="kicker">YOUTH / ESTADO DE RESPUESTA</text>
+  <text x="100" y="318" class="title">Comparte YOUTH</text>
+  <text x="100" y="438" class="subtitle">
+    <tspan x="100" dy="0">Si alguien quiere detalles, puede</tspan>
+    <tspan x="100" dy="54">responder directamente a este estado.</tspan>
+  </text>
+
+  <rect x="100" y="610" width="246" height="84" rx="42" fill="#ffffff" opacity="0.9"/>
+  <rect x="364" y="610" width="280" height="84" rx="42" fill="#ffffff" opacity="0.9"/>
+  <rect x="662" y="610" width="318" height="84" rx="42" fill="#ffffff" opacity="0.9"/>
+  <text x="223" y="663" text-anchor="middle" class="chipText">Presentacion</text>
+  <text x="504" y="663" text-anchor="middle" class="chipText">Modo de uso</text>
+  <text x="821" y="663" text-anchor="middle" class="chipText">Disponibilidad</text>
+
+  <rect x="100" y="850" width="880" height="520" rx="52" fill="url(#cta)"/>
+  <text x="148" y="1020" class="ctaTitle">
+    <tspan x="148" dy="0">Quieres mas</tspan>
+    <tspan x="148" dy="86">informacion?</tspan>
+  </text>
+  <text x="148" y="1236" class="ctaBody">
+    <tspan x="148" dy="0">Responde a este estado y te comparto</tspan>
+    <tspan x="148" dy="50">los detalles de YOUTH, su presentacion</tspan>
+    <tspan x="148" dy="50">y la disponibilidad segun mercado.</tspan>
+  </text>
+  <rect x="148" y="1450" width="330" height="96" rx="48" fill="#ffffff" opacity="0.16"/>
+  <text x="313" y="1512" text-anchor="middle" class="ctaBody">Responder ahora</text>
+
+  <text x="100" y="1758" class="foot">
+    <tspan x="100" dy="0">Nota breve: la presentacion y el nombre comercial pueden variar.</tspan>
+    <tspan x="100" dy="44">Usa esta pieza como estado generico de contacto.</tspan>
+  </text>
+
+  <text x="100" y="1824" class="foot">Pieza 04 / Consulta</text>
+</svg>

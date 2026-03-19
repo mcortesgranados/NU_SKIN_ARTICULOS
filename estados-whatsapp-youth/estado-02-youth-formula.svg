@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="5%" y1="0%" x2="95%" y2="100%">
+      <stop offset="0%" stop-color="#f8f4eb"/>
+      <stop offset="45%" stop-color="#ebf7f0"/>
+      <stop offset="100%" stop-color="#c7e8d9"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f7fbf8"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 700 30px 'Aptos', 'Trebuchet MS', sans-serif; letter-spacing: 0.24em; fill: #2b6259; }
+      .title { font: 700 84px 'Palatino Linotype', 'Book Antiqua', Georgia, serif; fill: #173b36; }
+      .subtitle { font: 400 38px 'Aptos', 'Trebuchet MS', sans-serif; fill: #355b56; }
+      .cardTitle { font: 700 42px 'Aptos', 'Trebuchet MS', sans-serif; fill: #163934; }
+      .cardBody { font: 400 30px 'Aptos', 'Trebuchet MS', sans-serif; fill: #466760; }
+      .foot { font: 500 28px 'Aptos', 'Trebuchet MS', sans-serif; fill: #41635c; }
+    </style>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <circle cx="910" cy="160" r="180" fill="#ffffff" opacity="0.55"/>
+  <circle cx="120" cy="1690" r="220" fill="#ffffff" opacity="0.32"/>
+  <path d="M786 0C918 128 974 230 1002 358C1026 462 1038 538 1080 646V0Z" fill="#9ccdb9" opacity="0.36"/>
+
+  <text x="100" y="164" class="kicker">YOUTH / RESUMEN VISUAL</text>
+  <text x="100" y="304" class="title">Lo que destaca</text>
+  <text x="100" y="398" class="title">en su formula</text>
+  <text x="100" y="506" class="subtitle">
+    <tspan x="100" dy="0">Una mezcla amplia de nutrientes</tspan>
+    <tspan x="100" dy="54">y extractos vegetales.</tspan>
+  </text>
+
+  <rect x="100" y="650" width="390" height="360" rx="38" fill="url(#card)"/>
+  <rect x="550" y="650" width="430" height="360" rx="38" fill="url(#card)"/>
+  <rect x="100" y="1070" width="390" height="360" rx="38" fill="url(#card)"/>
+  <rect x="550" y="1070" width="430" height="360" rx="38" fill="url(#card)"/>
+
+  <circle cx="160" cy="720" r="20" fill="#1f7a67"/>
+  <text x="198" y="738" class="cardTitle">Omega-3</text>
+  <text x="138" y="818" class="cardBody">
+    <tspan x="138" dy="0">EPA + DHA dentro de una</tspan>
+    <tspan x="138" dy="44">formula orientada al bienestar.</tspan>
+  </text>
+
+  <circle cx="610" cy="720" r="20" fill="#d29b56"/>
+  <text x="648" y="738" class="cardTitle">Vitamina D3 + K2</text>
+  <text x="588" y="818" class="cardBody">
+    <tspan x="588" dy="0">Nutrientes incluidos en la</tspan>
+    <tspan x="588" dy="44">ficha tecnica consultada.</tspan>
+  </text>
+
+  <circle cx="160" cy="1140" r="20" fill="#2e625c"/>
+  <text x="198" y="1158" class="cardTitle">CoQ10 + ALA</text>
+  <text x="138" y="1238" class="cardBody">
+    <tspan x="138" dy="0">Componentes antioxidantes</tspan>
+    <tspan x="138" dy="44">de la mezcla documentada.</tspan>
+  </text>
+
+  <circle cx="610" cy="1140" r="20" fill="#c05e4e"/>
+  <text x="648" y="1158" class="cardTitle">Carotenoides</text>
+  <text x="588" y="1238" class="cardBody">
+    <tspan x="588" dy="0">Licopeno, luteina y</tspan>
+    <tspan x="588" dy="44">astaxantina en la formula.</tspan>
+  </text>
+
+  <rect x="100" y="1540" width="880" height="140" rx="28" fill="#184641" opacity="0.08"/>
+  <text x="140" y="1602" class="foot">
+    <tspan x="140" dy="0">Basado en la ficha tecnica del proyecto.</tspan>
+    <tspan x="140" dy="44">Antes de compartir, valida etiqueta, pais y presentacion.</tspan>
+  </text>
+
+  <text x="100" y="1824" class="foot">Pieza 02 / Formula</text>
+</svg>
