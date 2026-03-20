@@ -540,12 +540,14 @@ def build_action_group(
 def render_description_with_actions(
     cell,
     sku: str,
+    category: str,
     product_metadata: dict[str, dict[str, str]],
     price_payload: str,
 ) -> str:
     return (
         '<div class="desc-inline">'
         f"{render_cell_content(cell)}"
+        f"{build_product_kind_badge(format_html_value(cell), category)}"
         f"{build_action_group(sku, format_html_value(cell), product_metadata, price_payload)}"
         "</div>"
     )
@@ -570,10 +572,19 @@ def build_html_table(ws, product_metadata: dict[str, dict[str, str]]) -> str:
     rows_html: list[str] = ['<div class="table-wrap desktop-view">', '<table class="price-table">', "<colgroup>"]
     rows_html.extend(colgroup)
     rows_html.append("</colgroup>")
+    current_category = ""
 
     for row_idx, row in enumerate(ws.iter_rows(), start=1):
         tag = "th" if row_idx == 1 else "td"
         row_cells: list[str] = []
+        row_attrs = ""
+        if row_idx > 1:
+            category_value = ws.cell(row=row_idx, column=1).value
+            if category_value:
+                current_category = clean_text(str(category_value))
+            product_name = format_html_value(ws.cell(row=row_idx, column=3))
+            product_kind = detect_product_kind(product_name, current_category)
+            row_attrs = f' class="product-row product-row--{product_kind}" data-product-kind="{product_kind}"'
         for cell in row:
             coord = (cell.row, cell.column)
             if coord in merged_skips:
@@ -627,12 +638,12 @@ def build_html_table(ws, product_metadata: dict[str, dict[str, str]]) -> str:
             if row_idx > 1 and cell.column == 3:
                 sku = str(ws.cell(row=row_idx, column=2).value or "").strip()
                 price_payload = build_price_payload(ws, row_idx)
-                content = render_description_with_actions(cell, sku, product_metadata, price_payload)
+                content = render_description_with_actions(cell, sku, current_category, product_metadata, price_payload)
             else:
                 content = render_cell_content(cell)
             row_cells.append(f"<{tag} {' '.join(attrs)}>{content}</{tag}>")
 
-        rows_html.append(f"<tr>{''.join(row_cells)}</tr>")
+        rows_html.append(f"<tr{row_attrs}>{''.join(row_cells)}</tr>")
 
     rows_html.append("</table>")
     rows_html.append("</div>")
@@ -668,6 +679,8 @@ def build_mobile_cards(ws, product_metadata: dict[str, dict[str, str]]) -> str:
         description_cell = ws.cell(row=row_idx, column=3)
         sku_cell = ws.cell(row=row_idx, column=2)
         price_payload = build_price_payload(ws, row_idx)
+        product_name = format_html_value(description_cell)
+        product_kind = detect_product_kind(product_name, current_category)
         metrics: list[str] = []
 
         for col_idx in range(4, ws.max_column + 1):
@@ -686,14 +699,17 @@ def build_mobile_cards(ws, product_metadata: dict[str, dict[str, str]]) -> str:
         sections.append(
             "\n".join(
                 [
-                    '<article class="mobile-card">',
+                    f'<article class="mobile-card mobile-card--{product_kind}" data-product-kind="{product_kind}">',
                     '<div class="mobile-card-top">',
+                    '<div class="product-meta-row">',
                     f'<span class="sku-chip">SKU {escape(format_html_value(sku_cell))}</span>',
+                    build_product_kind_badge(product_name, current_category),
+                    "</div>",
                     '<div class="product-title-row">',
                     f'<h3 class="product-title">{render_cell_content(description_cell)}</h3>',
                     build_action_group(
                         str(sku_cell.value or "").strip(),
-                        format_html_value(description_cell),
+                        product_name,
                         product_metadata,
                         price_payload,
                     ),
@@ -734,6 +750,7 @@ def export_workbook_html(
                 [
                     f'<section id="{safe_id}" class="sheet-panel{active}">',
                     f"<h2>{escape(sheet_name)}</h2>",
+                    build_sheet_summary(ws),
                     build_html_table(ws, product_metadata),
                     build_mobile_cards(ws, product_metadata),
                     "</section>",
@@ -867,6 +884,45 @@ def export_workbook_html(
       color: #fff;
       border-color: #1565c0;
     }}
+    .kind-legend {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 16px;
+    }}
+    .panel-summary {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 16px;
+    }}
+    .summary-chip,
+    .kind-badge {{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }}
+    .summary-chip {{
+      padding: 7px 12px;
+      border: 1px solid #d9e5f3;
+      background: #f8fbff;
+      color: #233142;
+    }}
+    .summary-chip--single {{
+      border-color: #b7dfc8;
+      background: #ecfdf5;
+      color: #166534;
+    }}
+    .summary-chip--combo {{
+      border-color: #f3d19c;
+      background: #fff7ed;
+      color: #b45309;
+    }}
     .sheet-panel {{
       display: none;
       background: var(--card);
@@ -924,6 +980,22 @@ def export_workbook_html(
       gap: 8px;
       max-width: 100%;
       white-space: normal;
+    }}
+    .kind-badge {{
+      padding: 5px 10px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }}
+    .kind-badge--single {{
+      background: #ecfdf5;
+      border-color: #b7dfc8;
+      color: #166534;
+    }}
+    .kind-badge--combo {{
+      background: #fff7ed;
+      border-color: #f3d19c;
+      color: #b45309;
     }}
     .action-group {{
       display: inline-flex;
@@ -1018,10 +1090,22 @@ def export_workbook_html(
       background: #ffffff;
       box-shadow: 0 10px 24px rgba(21, 101, 192, 0.08);
     }}
+    .mobile-card--single {{
+      border-left: 4px solid #22c55e;
+    }}
+    .mobile-card--combo {{
+      border-left: 4px solid #f59e0b;
+    }}
     .mobile-card-top {{
       display: grid;
       gap: 10px;
       margin-bottom: 12px;
+    }}
+    .product-meta-row {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
     }}
     .sku-chip {{
       display: inline-flex;
@@ -1268,6 +1352,10 @@ def export_workbook_html(
     </section>
     <div class="tabs">
       {"".join(tab_buttons)}
+    </div>
+    <div class="kind-legend" aria-label="Tipos de producto">
+      <span class="kind-badge kind-badge--single">Producto individual</span>
+      <span class="kind-badge kind-badge--combo">Combo / kit</span>
     </div>
     {"".join(sections)}
     <p class="footer">Archivo fuente: {escape(str(OUTPUT_XLSX))}</p>
@@ -1740,14 +1828,55 @@ def relative_href(from_path: Path, to_path: Path) -> str:
     return Path(os.path.relpath(to_path, start=from_path.parent)).as_posix()
 
 
+COMBO_KEYWORDS = (
+    "kit",
+    "combo",
+    "sistema",
+    "system",
+    "essentials",
+    "duo",
+    "bundle",
+    "set",
+)
+
+COMBO_COUNT_PATTERN = re.compile(
+    r"(?<!\d)(\d+)\s*(pk|pzs?|pzas|piezas?|bottles?|bags?|bolsas?)(?![a-z])"
+)
+
+ACCESSORY_KEYWORDS = ("cabezal", "cargador", "stand", "accent", "punta", "accesorio", "charger")
+
+
+def normalized_product_text(name: str, category: str) -> str:
+    return normalize_key(f"{name} {category}")
+
+
+def is_subscription_product(name: str, category: str) -> bool:
+    return "suscrip" in normalized_product_text(name, category)
+
+
+def is_accessory_product(name: str, category: str) -> bool:
+    text = normalized_product_text(name, category)
+    return any(keyword in text for keyword in ACCESSORY_KEYWORDS)
+
+
+def detect_product_kind(name: str, category: str) -> str:
+    text = normalized_product_text(name, category)
+    if any(keyword in text for keyword in COMBO_KEYWORDS):
+        return "combo"
+    for match in COMBO_COUNT_PATTERN.finditer(text):
+        quantity = int(match.group(1))
+        if quantity > 1:
+            return "combo"
+    return "single"
+
+
 def detect_product_mode(name: str, category: str) -> str:
-    text = normalize_key(f"{name} {category}")
-    if "suscrip" in text:
-        return "subscription"
-    if "kit" in text or "pack" in text or "pk" in text:
-        return "kit"
-    if any(keyword in text for keyword in ("cabezal", "cargador", "stand", "accent", "punta", "accesorio", "charger")):
+    if is_accessory_product(name, category):
         return "accessory"
+    if detect_product_kind(name, category) == "combo":
+        return "kit"
+    if is_subscription_product(name, category):
+        return "subscription"
     return "single"
 
 
@@ -1869,17 +1998,30 @@ def get_profile_copy(profile_key: str) -> dict[str, object]:
     return profiles.get(profile_key, profiles["skincare"])
 
 
-def build_catalog_blurb(name: str, category: str, metadata: dict[str, str], profile_key: str, mode: str) -> str:
+def build_catalog_blurb(
+    name: str,
+    category: str,
+    metadata: dict[str, str],
+    profile_key: str,
+    product_kind: str,
+    is_subscription: bool,
+    is_accessory: bool,
+) -> str:
     description = clean_text(metadata.get("description", ""))
     if description and not is_generic_catalog_description(description):
         return description
 
-    mode_copy = {
-        "kit": "Se presenta como kit, asi que la venta funciona mejor cuando se explica el valor conjunto y la comodidad de comprar varios pasos a la vez.",
-        "subscription": "Al estar en formato de suscripcion, conviene venderlo desde continuidad, recompra y simplificacion del pedido.",
-        "accessory": "Al ser accesorio o reposicion, el argumento fuerte es compatibilidad, mantenimiento y extension del uso del sistema principal.",
-        "single": "Su lectura comercial mejora cuando se aterriza a un beneficio claro, una rutina concreta y una objecion principal.",
-    }
+    if is_accessory:
+        format_copy = "Al ser accesorio o reposicion, el argumento fuerte es compatibilidad, mantenimiento y extension del uso del sistema principal."
+    elif product_kind == "combo":
+        format_copy = "Se presenta como combo o kit, asi que la venta funciona mejor cuando se explica el valor conjunto y la comodidad de comprar varios pasos a la vez."
+    else:
+        format_copy = "Su lectura comercial mejora cuando se aterriza a un beneficio claro, una rutina concreta y una objecion principal."
+
+    subscription_copy = ""
+    if is_subscription:
+        subscription_copy = " Ademas, al estar en formato de suscripcion, conviene venderlo desde continuidad, recompra y simplificacion del pedido."
+
     family_copy = {
         "oral": "Pertenece a higiene oral y se mueve bien por rutina diaria, demostracion corta y recompra.",
         "skincare": "Pertenece a cuidado personal y requiere una explicacion clara del paso que ocupa dentro de la rutina.",
@@ -1888,26 +2030,70 @@ def build_catalog_blurb(name: str, category: str, metadata: dict[str, str], prof
         "bodycare": "Pertenece a cuidado corporal y conviene llevarlo a una necesidad concreta de confort o apariencia.",
         "nutrition": "Pertenece a bienestar y nutricion, donde la continuidad y el acompanamiento son parte del cierre.",
     }
-    return f"{name} forma parte de la categoria {category} de Nu Skin. {family_copy.get(profile_key, family_copy['skincare'])} {mode_copy.get(mode, mode_copy['single'])}"
+    return f"{name} forma parte de la categoria {category} de Nu Skin. {family_copy.get(profile_key, family_copy['skincare'])} {format_copy}{subscription_copy}"
 
 
-def build_tags(category: str, mode: str, has_image: bool, public_price: float | None, member_price: float | None) -> list[str]:
-    mode_labels = {
-        "kit": "Formato kit",
-        "subscription": "Suscripcion",
-        "accessory": "Accesorio / reposicion",
-        "single": "SKU individual",
+def build_tags(
+    category: str,
+    product_kind: str,
+    is_subscription: bool,
+    is_accessory: bool,
+    has_image: bool,
+    public_price: float | None,
+    member_price: float | None,
+) -> list[str]:
+    kind_labels = {
+        "combo": "Combo / kit",
+        "single": "Producto individual",
     }
     tags = [
         category,
-        mode_labels.get(mode, "SKU individual"),
-        "Imagen oficial" if has_image else "Imagen referencial",
+        kind_labels.get(product_kind, "Producto individual"),
     ]
+    if is_subscription:
+        tags.append("Suscripcion")
+    if is_accessory:
+        tags.append("Accesorio / reposicion")
+    tags.append("Imagen oficial" if has_image else "Imagen referencial")
     if public_price is not None:
         tags.append(f"Publico {format_currency(public_price)}")
     if member_price is not None:
         tags.append(f"Miembro {format_currency(member_price)}")
     return tags
+
+
+def build_product_kind_badge(name: str, category: str) -> str:
+    product_kind = detect_product_kind(name, category)
+    label = "Combo / kit" if product_kind == "combo" else "Producto individual"
+    return (
+        f'<span class="kind-badge kind-badge--{product_kind}" '
+        f'data-product-kind="{product_kind}">{escape(label)}</span>'
+    )
+
+
+def summarize_sheet_product_kinds(ws) -> dict[str, int]:
+    counts = {"single": 0, "combo": 0}
+    current_category = ""
+    for row_idx in range(2, ws.max_row + 1):
+        category_value = ws.cell(row=row_idx, column=1).value
+        if category_value:
+            current_category = clean_text(str(category_value))
+        name = format_html_value(ws.cell(row=row_idx, column=3))
+        product_kind = detect_product_kind(name, current_category)
+        counts[product_kind] = counts.get(product_kind, 0) + 1
+    return counts
+
+
+def build_sheet_summary(ws) -> str:
+    counts = summarize_sheet_product_kinds(ws)
+    total = counts.get("single", 0) + counts.get("combo", 0)
+    return (
+        '<div class="panel-summary">'
+        f'<span class="summary-chip">Total {total}</span>'
+        f'<span class="summary-chip summary-chip--single">{counts.get("single", 0)} individuales</span>'
+        f'<span class="summary-chip summary-chip--combo">{counts.get("combo", 0)} combos / kits</span>'
+        "</div>"
+    )
 
 
 def bullet_list_html(items: list[str]) -> str:
@@ -1927,8 +2113,18 @@ def build_detail_page(
     product_link = (metadata.get("link") or FALLBACK_PRODUCT_URL.format(sku=sku)).strip()
     profile_key = infer_profile_key(category, name)
     profile = get_profile_copy(profile_key)
-    mode = detect_product_mode(name, category)
-    blurb = build_catalog_blurb(name, category, metadata, profile_key, mode)
+    product_kind = detect_product_kind(name, category)
+    has_subscription = is_subscription_product(name, category)
+    has_accessory_profile = is_accessory_product(name, category)
+    blurb = build_catalog_blurb(
+        name,
+        category,
+        metadata,
+        profile_key,
+        product_kind,
+        has_subscription,
+        has_accessory_profile,
+    )
 
     public_price = safe_float(row.get("Precio Publico"))
     member_price = safe_float(row.get("Precio Miembro"))
@@ -1945,7 +2141,18 @@ def build_detail_page(
     image_url = (metadata.get("image_url") or metadata.get("thumbnail_url") or "").strip()
     image_url = image_url or build_placeholder_data_uri(name, sku)
 
-    tags_html = "".join(f'<span class="tag">{escape(tag)}</span>' for tag in build_tags(category, mode, bool(metadata.get("image_url") or metadata.get("thumbnail_url")), public_price, member_price))
+    tags_html = "".join(
+        f'<span class="tag">{escape(tag)}</span>'
+        for tag in build_tags(
+            category,
+            product_kind,
+            has_subscription,
+            has_accessory_profile,
+            bool(metadata.get("image_url") or metadata.get("thumbnail_url")),
+            public_price,
+            member_price,
+        )
+    )
 
     detail_rows = []
     for label in PRICE_COLUMNS:

@@ -1,0 +1,12 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#5da1e0ff",
+    "activityBar.foreground": "#1d1c1c",
+    "titleBar.activeBackground": "#5da1e0ff",
+    "titleBar.activeForeground": "#0e0d0d"
+},
+"java.compile.nullAnalysis.mode": "automatic",
+"java.configuration.updateBuildConfiguration": "interactive",
+"java.debug.settings.onBuildFailureProceed": true,
+"window.title": "NU_SKIN_ARTICULOS ${separator}${rootPath}"
+}
