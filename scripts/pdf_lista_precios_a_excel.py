@@ -540,17 +540,19 @@ def build_action_group(
 def render_description_with_actions(
     cell,
     sku: str,
-    category: str,
     product_metadata: dict[str, dict[str, str]],
     price_payload: str,
 ) -> str:
     return (
         '<div class="desc-inline">'
         f"{render_cell_content(cell)}"
-        f"{build_product_kind_badge(format_html_value(cell), category)}"
         f"{build_action_group(sku, format_html_value(cell), product_metadata, price_payload)}"
         "</div>"
     )
+
+
+def build_product_kind_table_cell(name: str, category: str) -> str:
+    return f'<td class="kind-col">{build_product_kind_badge(name, category)}</td>'
 
 
 def build_html_table(ws, product_metadata: dict[str, dict[str, str]]) -> str:
@@ -568,6 +570,8 @@ def build_html_table(ws, product_metadata: dict[str, dict[str, str]]) -> str:
     for column_idx in range(1, ws.max_column + 1):
         width = ws.column_dimensions[get_column_letter(column_idx)].width or 14
         colgroup.append(f'<col style="width:{int(width * 8)}px">')
+        if column_idx == 3:
+            colgroup.append('<col style="width:150px">')
 
     rows_html: list[str] = ['<div class="table-wrap desktop-view">', '<table class="price-table">', "<colgroup>"]
     rows_html.extend(colgroup)
@@ -638,10 +642,15 @@ def build_html_table(ws, product_metadata: dict[str, dict[str, str]]) -> str:
             if row_idx > 1 and cell.column == 3:
                 sku = str(ws.cell(row=row_idx, column=2).value or "").strip()
                 price_payload = build_price_payload(ws, row_idx)
-                content = render_description_with_actions(cell, sku, current_category, product_metadata, price_payload)
+                content = render_description_with_actions(cell, sku, product_metadata, price_payload)
             else:
                 content = render_cell_content(cell)
             row_cells.append(f"<{tag} {' '.join(attrs)}>{content}</{tag}>")
+            if cell.column == 3:
+                if row_idx == 1:
+                    row_cells.append('<th class="kind-col">Tipo</th>')
+                else:
+                    row_cells.append(build_product_kind_table_cell(product_name, current_category))
 
         rows_html.append(f"<tr{row_attrs}>{''.join(row_cells)}</tr>")
 
@@ -970,6 +979,12 @@ def export_workbook_html(
     }}
     .price-table td.cat {{
       min-width: 130px;
+    }}
+    .price-table th.kind-col,
+    .price-table td.kind-col {{
+      text-align: center;
+      vertical-align: middle;
+      white-space: nowrap;
     }}
     .price-table td.num {{
       font-variant-numeric: tabular-nums;
